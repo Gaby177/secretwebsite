@@ -1,0 +1,391 @@
+:root {
+    /* Stardew-esque Palette */
+    --bg-color: #2c2937;
+    /* Dark but soft background for outside */
+    --container-bg: #fff1e6;
+    /* Creamy paper/parchment */
+    --text-color: #5d4037;
+    /* Dark brown for text */
+    --accent-color: #78a1bb;
+    /* Soft blue */
+    --success-color: #8cba51;
+    /* Soft green */
+    --error-color: #d95763;
+    /* Soft red */
+    --ui-panel-bg: #f8c291;
+    /* Soft orange/wood tone for UI elements */
+    --border-dark: #4a3b32;
+    /* Dark wood border */
+
+    --font-main: 'Press Start 2P', cursive;
+}
+
+* {
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    /* Crucial for pixel art crispness */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    /* Optional: a tiling pixel pattern background would be nice here */
+    background-image: linear-gradient(45deg, #353242 25%, transparent 25%, transparent 75%, #353242 75%, #353242),
+        linear-gradient(45deg, #353242 25%, transparent 25%, transparent 75%, #353242 75%, #353242);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+
+    color: var(--text-color);
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#game-outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+#game-title {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #fff;
+    text-shadow: 4px 4px 0px #4a3b32;
+    text-align: center;
+    line-height: 1.5;
+}
+
+#game-container {
+    width: 100%;
+    min-height: 600px;
+    /* Taller for cinematic feel */
+    background-color: var(--container-bg);
+    border: 8px solid var(--border-dark);
+    border-radius: 25px;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow:
+        inset 0 0 40px rgba(139, 69, 19, 0.1),
+        /* Inner vignette */
+        10px 10px 0px rgba(0, 0, 0, 0.3);
+    /* Hard shadow outside */
+    transition: all 0.3s ease;
+}
+
+/* No Scanlines */
+
+#content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+#dialogue-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 4px solid var(--border-dark);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    position: relative;
+    text-align: left;
+    min-height: 140px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    /* Interaction hint */
+}
+
+#speaker-name {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background: var(--ui-panel-bg);
+    color: var(--border-dark);
+    padding: 8px 12px;
+    border: 3px solid var(--border-dark);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+#dialogue-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #4a3b32;
+    margin-top: 10px;
+}
+
+#continue-indicator {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 1.2rem;
+    color: var(--error-color);
+    /* Red arrow looks nice */
+}
+
+.blink {
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(4px);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Use flex gap for controls */
+#controls-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* Interaction Tweaks */
+* {
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Allow selection in inputs only */
+input,
+textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Reset Button - Fixed Icon */
+#reset-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    background: var(--error-color);
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    /* Icon content set in CSS or HTML, assuming text content is 'R' or icon */
+}
+
+#reset-btn::before {
+    content: "↻";
+    /* Unicode refresh icon */
+    font-weight: bold;
+}
+
+/* Hide original text if any */
+#reset-btn {
+    color: transparent;
+    /* Hide text 'Reset Game' */
+    overflow: hidden;
+}
+
+#reset-btn::before {
+    color: #fff;
+    position: absolute;
+    /* Re-center icon */
+}
+
+/* RPG Buttons */
+.pixel-btn {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: 4px solid var(--border-dark);
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
+    box-shadow: 0 6px 0 var(--border-dark);
+    text-transform: uppercase;
+    position: relative;
+    top: 0;
+    min-width: 200px;
+}
+
+.pixel-btn:hover:not(:disabled) {
+    background-color: #8bbcd4;
+    /* Lighter blue */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 var(--border-dark);
+}
+
+.pixel-btn:active:not(:disabled) {
+    transform: translateY(6px);
+    /* Press down effect */
+    box-shadow: 0 0 0 var(--border-dark);
+}
+
+.pixel-btn:disabled {
+    background-color: #ccc;
+    color: #888;
+    box-shadow: 0 6px 0 #888;
+    cursor: not-allowed;
+    transform: translateY(0);
+}
+
+/* Secondary / Reset Button */
+.pixel-btn.secondary {
+    background-color: var(--error-color);
+    font-size: 0.8rem;
+    padding: 10px 20px;
+    min-width: auto;
+}
+
+.pixel-btn.secondary:hover:not(:disabled) {
+    background-color: #e57373;
+}
+
+#reset-btn {
+    align-self: flex-end;
+    /* Position in corner of flex container usually, or absolute */
+    margin-top: auto;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"],
+select {
+    background: #fff;
+    border: 3px solid var(--border-dark);
+    border-radius: 8px;
+    color: var(--text-color);
+    padding: 15px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    width: 80%;
+    margin-bottom: 20px;
+    outline: none;
+    box-shadow: inset 4px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--accent-color);
+}
+
+/* Images */
+.game-img {
+    max-width: 100%;
+    max-height: 250px;
+    border: 4px solid #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+/* Specific Stage Styles */
+
+/* Music Grid */
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.note-btn {
+    background-color: #fff;
+    color: var(--border-dark);
+    border: 3px solid var(--border-dark);
+    padding: 15px;
+    min-width: unset;
+    border-radius: 8px;
+    box-shadow: 0 4px 0 var(--border-dark);
+}
+
+.note-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--border-dark);
+}
+
+/* Blockquotes for Bible verse */
+blockquote {
+    font-family: 'Press Start 2P', serif;
+    /* Or maybe keep pixel? sticking to pixel for consistency */
+    font-size: 0.9rem;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-left: 5px solid var(--accent-color);
+    margin: 20px 0;
+    border-radius: 8px;
+    font-style: italic;
+}
+
+/* Feedback Message */
+#feedback-msg {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    min-height: 1.2rem;
+}
+
+/* Utility for layout */
+.dropdown-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
