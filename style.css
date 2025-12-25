@@ -466,6 +466,10 @@ blockquote {
 
 /* Mobile Optimization */
 @media (max-width: 600px) {
+    body {
+        background-position: left center;
+    }
+
     :root {
         font-size: 14px;
         /* Slightly smaller base font */
@@ -475,6 +479,15 @@ blockquote {
         padding: 15px;
         border-width: 4px;
         min-height: 500px;
+    }
+
+    #speaker-name {
+        top: -15px;
+    }
+
+
+    #reset-btn {
+        display: none !important;
     }
 
     #game-title {
