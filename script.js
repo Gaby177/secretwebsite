@@ -357,7 +357,7 @@ function runIntroSequence() {
     contentArea.classList.add('fade-in');
 
     const dialogues = [
-        { speaker: 'Unknown', text: 'Bine ai venit. Numele meu este G' },
+        { speaker: 'Unknown', text: 'Bine ai venit. Numele meu este G (apasa pentru a continua)' },
         { speaker: 'Profesor G', text: 'In ultima vreme am fost preocupat de o cercetare extrem de importanta.' },
         { speaker: 'Profesor G', text: 'Un virus misterios creste de la o zi la alta, infiltrandu-se in tot spatiul virtual.' },
         { speaker: 'Profesor G', text: 'Daca nu este oprit, internetul asa cum il stim ar putea fi infectat.' },
@@ -456,17 +456,17 @@ function runStage1() {
         { speaker: 'Profesor G', text: 'Trebuie neaparat sa gasim acel obiect, de altfel toate pozele vor fi infectate.' },
         { speaker: 'Profesor G', text: 'Nu-i asa ca nu vrei sa pierzi toate acele amintiri frumoase?' },
         { speaker: 'Profesor G', text: 'Tot ce stiu este ca acel obiect este o cheie.' },
-        { speaker: 'Profesor G', text: 'Vezi daca poti sa identifici in ce casuta se afla cheia.' }
+        { speaker: 'Profesor G', text: 'Vezi daca poti sa identifici la ce coordonate se afla cheia.' }
     ];
 
     playDialogueSequence(d, () => {
         contentArea.innerHTML = '';
         const img = document.createElement('img');
-        img.src = 'img/find.png';
+        img.src = 'img/find.webp';
         img.className = 'game-img fade-in';
         contentArea.appendChild(img);
 
-        const inp = createInput('Care sunt coordonatele?(ex:A1)');
+        const inp = createInput('ex:A1');
         contentArea.appendChild(inp);
 
         const btn = createButton('Verifica', () => {
@@ -539,7 +539,8 @@ function runStage3() {
         { speaker: 'Profesor G', text: 'A vizitat animatia Klaus. O fi virus… dar trebuie să recunosc, are gusturi bune :D' },
         { speaker: 'Profesor G', text: 'Klaus e o animație excelentă, ți-o recomand cu drag dacă n-ai apucat s-o vezi.' },
         { speaker: 'Profesor G', text: 'Se pare ca aici a manipulat annul de lansare pentru niste filme' },
-        { speaker: 'Profesor G', text: 'Vezi daca poti sa ma ajuti si sa identifici anii corecti pentru filmele urmatoare:' }
+        { speaker: 'Profesor G', text: 'Daca nu le punem la loc, aceste filme risca sa dispara.' },
+        { speaker: 'Profesor G', text: 'Vezi daca poti sa identifici anii de lansare pentru filmele urmatoare:' }
     ];
 
     playDialogueSequence(d1, () => {
@@ -597,7 +598,8 @@ function runStage3() {
 function runStage4() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'Foarte bine, ai facut o treaba excelenta.' },
+        { speaker: 'Profesor G', text: 'Foarte bine, ai identificat corect datelele de lansare.' },
+        { speaker: 'Profesor G', text: 'Ar fi fost pacat ca aceste filme sa fi disparut.' },
         { speaker: 'Profesor G', text: 'Sa continuam cu următoarea urmă: spotify.com' },
         { speaker: 'Profesor G', text: 'Ce bine că am ales pe cineva cu ureche muzicală.' },
         { speaker: 'Profesor G', text: 'Aici a lasat o bariera - un mic puzzle pe care trebuie sa-l rezolvi.' },
@@ -824,7 +826,7 @@ function runStage7() {
     playDialogueSequence(d, () => {
         contentArea.innerHTML = '';
         const img = document.createElement('img');
-        img.src = 'img/map.png';
+        img.src = 'img/map.webp';
         img.className = 'game-img';
         contentArea.appendChild(img);
 
@@ -861,7 +863,7 @@ function runFinal() {
         hideDialogue();
         contentArea.innerHTML = '<h1 style="color: var(--success-color); font-size: 3rem;">FIN</h1>';
 
-        const bigReset = createButton('Reset Game', fullReset);
+        const bigReset = createButton('Reset Story', fullReset);
         bigReset.style.marginTop = '40px';
         contentArea.appendChild(bigReset);
 

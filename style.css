@@ -30,12 +30,14 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
-    /* Optional: a tiling pixel pattern background would be nice here */
+    /* Optional: a tiling pixel pattern background would be nice here 
     background-image: linear-gradient(45deg, #353242 25%, transparent 25%, transparent 75%, #353242 75%, #353242),
         linear-gradient(45deg, #353242 25%, transparent 25%, transparent 75%, #353242 75%, #353242);
     background-size: 40px 40px;
-    background-position: 0 0, 20px 20px;
-
+    background-position: 0 0, 20px 20px;*/
+    background-image: URL("img/BG.png");
+    background-size: cover;
+    background-position: center;
     color: var(--text-color);
     font-family: var(--font-main);
     display: flex;
@@ -229,7 +231,7 @@ textarea {
 }
 
 #reset-btn::before {
-    content: "↻";
+    content: "🗘";
     /* Unicode refresh icon */
     font-weight: bold;
 }
