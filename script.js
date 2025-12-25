@@ -410,7 +410,13 @@ function showMissionAborted() {
     ];
     playDialogueSequence(d, () => {
         hideDialogue();
-        contentArea.innerHTML = '<h1 style="color:var(--error-color); font-size: 2.5rem;">MISSION ABORTED</h1>';
+        contentArea.innerHTML = '<h1 style="color:var(--error-color); font-size: 2.5rem; margin-bottom: 20px;">MISSION ABORTED</h1>';
+
+        const mainScreenBtn = createButton('Main Screen', () => {
+            saveState(STAGES.PIN_CHECK);
+            renderStage(STAGES.PIN_CHECK);
+        });
+        contentArea.appendChild(mainScreenBtn);
     });
 }
 
