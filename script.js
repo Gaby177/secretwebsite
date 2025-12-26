@@ -365,7 +365,7 @@ function runIntroSequence() {
         { speaker: 'Unknown', text: 'Insa a lasat in urma lui pagube care, daca nu sunt remediate...' },
         { speaker: 'Unknown', text: 'ameninta sa distruga website-uri intregi.' },
         { speaker: 'Unknown', text: 'Am nevoie de ajutorul tau pentru a le identifica si  elimina.' },
-        { speaker: 'Unknown', text: 'Esti pregatita sa pornesti in aceasta misiune?' }
+        { speaker: 'Unknown', text: 'Esti gata sa pornesti in aceasta misiune?' }
     ];
     playDialogueSequence(dialogues, () => {
         saveState(STAGES.CHOICE);
@@ -376,13 +376,13 @@ function runIntroSequence() {
 function showChoiceScreen() {
     contentArea.innerHTML = '';
 
-    const btnYes = createButton('Da, sunt pregatita!', () => {
+    const btnYes = createButton('I am ready', () => {
         // Clear buttons immediately
         controlsArea.innerHTML = '';
 
         const d = [
             { speaker: 'Unknown', text: 'Pentru a salva internetul, am nevoie de timpul si atentia ta.' },
-            { speaker: 'Unknown', text: 'Apasa butonul urmator atunci cand esti pregatita.' }
+            { speaker: 'Unknown', text: 'Apasa butonul urmator atunci cand esti gata.' }
         ];
         playDialogueSequence(d, () => {
             saveState(STAGES.READY_WAIT);
@@ -390,7 +390,7 @@ function showChoiceScreen() {
         });
     });
 
-    const btnNo = createButton('Nu ma intereseaza', () => {
+    const btnNo = createButton('I dont care', () => {
         // Clear buttons immediately
         controlsArea.innerHTML = '';
         saveState(STAGES.MISSION_ABORTED);
@@ -876,3 +876,4 @@ function runFinal() {
         resetBtn.classList.add('hidden');
     });
 }
+
