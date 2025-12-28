@@ -227,6 +227,8 @@ textarea {
     border: 2px solid #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     color: #fff;
+
+    display: none;
     /* Icon content set in CSS or HTML, assuming text content is 'R' or icon */
 }
 
