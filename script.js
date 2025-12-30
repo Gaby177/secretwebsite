@@ -344,22 +344,36 @@ function initAudio() {
     }
 }
 
-function playTone(freq, duration = 0.3) {
+function playTone(freq, duration = 0.5) {
     initAudio();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+    const now = audioCtx.currentTime;
 
-    osc.type = 'sine'; // retro sound
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    // We use multiple oscillators to mimic a piano's rich harmonic content
+    // Fundamental, second harmonic (octave), and third harmonic (perfect fifth)
+    const harmonics = [
+        { type: 'sine', ratio: 1, gain: 0.5 },
+        { type: 'triangle', ratio: 2, gain: 0.2 },
+        { type: 'sine', ratio: 3, gain: 0.1 }
+    ];
 
-    gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    harmonics.forEach(h => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
 
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
+        osc.type = h.type;
+        osc.frequency.setValueAtTime(freq * h.ratio, now);
 
-    osc.start();
-    osc.stop(audioCtx.currentTime + duration);
+        // Piano envelope: sharp attack, exponential decay
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(h.gain, now + 0.01); // Instant strike
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + duration);
+    });
 }
 
 // --- Stage Implementations ---
@@ -387,7 +401,7 @@ function runIntroSequence() {
 function showChoiceScreen() {
     contentArea.innerHTML = '';
 
-    const btnYes = createButton('I.m Ready!', () => {
+    const btnYes = createButton('I am Ready!', () => {
         // Clear buttons immediately
         controlsArea.innerHTML = '';
 
@@ -465,7 +479,7 @@ function runStage1() {
 
     const d = [
         { speaker: 'Unknown', text: 'Super, ma bucur ca ai ales sa accepti aceasta misiune.' },
-        { speaker: 'Unknown', text: 'Imi cer scuze, inca nu m-am prezentat:' },
+        { speaker: 'Unknown', text: 'Inca nu m-am prezentat:' },
         { speaker: 'Unknown', text: 'Numele meu este G. Cunoscut ca profesor G.' },
         { speaker: 'Profesor G', text: 'Ce trebuie sa stii despre acest virus este ca e foarte siret.' },
         { speaker: 'Profesor G', text: 'Din fericire am un dipozitiv care ma ajuta sa identific website-urile unde a produs pagube.' },
@@ -615,12 +629,12 @@ function runStage4() {
     const d = [
         { speaker: 'Profesor G', text: 'Foarte bine, ai identificat corect datelele de lansare.' },
         { speaker: 'Profesor G', text: 'Ar fi fost pacat ca aceste filme sa fi disparut.' },
-        { speaker: 'Profesor G', text: 'Si trebuie sa recunosc, are gusturi bune :D' },
+        { speaker: 'Profesor G', text: 'Si trebuie sa recunosc ca virusul are gusturi bune :D' },
         { speaker: 'Profesor G', text: 'Ultima, Klaus, e o animatie excelenta pe care ti-o recomand cu drag daca nu ai vazut-o inca.' },
         { speaker: 'Profesor G', text: 'Sa continuam cu urmatorul obiectiv al virusului: Spotify.com' },
         { speaker: 'Profesor G', text: 'Aici a lasat o bariera - un mic puzzle pe care trebuie sa-l rezolvi.' },
         { speaker: 'Profesor G', text: 'Pentru a continua sa ii luam urma, am nevoie de urechea ta muzicala.' },
-        { speaker: 'Profesor G', text: 'Poti identifica pattern-ul melodiei? (P.S O sa ai nevoie de sunet)' }
+        { speaker: 'Profesor G', text: 'Poti identifica notele melodiei? (P.S O sa ai nevoie de sunet)' }
     ];
     playDialogueSequence(d, () => {
         contentArea.innerHTML = '';
@@ -692,7 +706,7 @@ function checkMusicInput(note) {
 function runStage5() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'Bravo! Eram sigur ca nu o sa ai probleme cu acest puzzle.' },
+        { speaker: 'Profesor G', text: 'Eram sigur ca nu o sa ai probleme cu acest puzzle.' },
         { speaker: 'Profesor G', text: 'Stiam ca ai ureche muzicala si cu siguranta ca ti s-a mai spus si ca ai o voce frumoasa' },
         { speaker: 'Profesor G', text: 'Continua sa dezvolti aceasta calitate pe care o ai. ' },
         { speaker: 'Profesor G', text: 'Bun, sa continuam cu misiunea noastra.' },
