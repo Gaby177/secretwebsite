@@ -63,7 +63,7 @@ function saveState(stage) {
 }
 
 function fullReset() {
-    if (confirm('Sigur vrei sa stergi tot progresul?')) {
+    if (confirm('¿Estás seguro de que quieres borrar todo el progreso?')) {
         localStorage.removeItem('pixelGameState');
         location.reload();
     }
@@ -85,12 +85,12 @@ function renderStage(stage) {
 
     switch (stage) {
         case STAGES.PIN_CHECK:
-            contentArea.innerHTML = '<h3>ACCES RESTRICTIONAT</h3>';
+            contentArea.innerHTML = '<h3>ACCESO RESTRINGIDO</h3>';
             renderPinTerminal();
             break;
 
         case STAGES.START:
-            const startBtn = createButton('Continua', () => {
+            const startBtn = createButton('Continuar', () => {
                 // Clear the content area (buttons) immediately
                 contentArea.innerHTML = '';
                 saveState(STAGES.INTRO);
@@ -261,7 +261,7 @@ function renderPinTerminal() {
 
     const display = document.createElement('div');
     display.className = 'pin-display';
-    display.textContent = 'ENTER PIN';
+    display.textContent = 'INTRODUCIR PIN';
     terminal.appendChild(display);
 
     const keypad = document.createElement('div');
@@ -271,7 +271,7 @@ function renderPinTerminal() {
     const correctPin = '060301';
 
     const updateDisplay = () => {
-        display.textContent = '*'.repeat(currentInput.length) || 'ENTER PIN';
+        display.textContent = '*'.repeat(currentInput.length) || 'INTRODUCIR PIN';
         if (currentInput.length > 0) {
             display.style.letterSpacing = '10px';
         } else {
@@ -303,7 +303,7 @@ function renderPinTerminal() {
                 updateDisplay();
             } else if (key === 'OK') {
                 if (currentInput === correctPin) {
-                    display.textContent = 'ACCESS GRANTED';
+                    display.textContent = 'ACCESO CONCEDIDO';
                     display.style.color = '#8cba51';
                     playTone(880, 0.2);
                     setTimeout(() => {
@@ -311,7 +311,7 @@ function renderPinTerminal() {
                         renderStage(STAGES.START);
                     }, 1000);
                 } else {
-                    display.textContent = 'DENIED';
+                    display.textContent = 'DENEGADO';
                     display.style.color = '#d95763';
                     playTone(220, 0.3);
                     /*showFeedback('ACCES RESPINS.', true);*/
@@ -382,15 +382,15 @@ function runIntroSequence() {
     contentArea.classList.add('fade-in');
 
     const dialogues = [
-        { speaker: 'Unknown', text: 'In ultima vreme am fost preocupat de o cercetare extrem de importanta. (apasa pentru a continua)' },
-        { speaker: 'Unknown', text: 'Un specimen informatic care promitea imbunatatirea sigurantei paginilor web' },
-        { speaker: 'Unknown', text: 'Inca nu stiu de ce, dar dezvoltarea lui nu a iesit cum era planuit ' },
-        { speaker: 'Unknown', text: 'S-a transformat intr-un virus informatic, si a scapat din capsula in care era stocat' },
-        { speaker: 'Unknown', text: 'Cu greu am reusit sa-l prind si sa-l inchid la loc.' },
-        { speaker: 'Unknown', text: 'Insa a lasat in urma lui pagube care, daca nu sunt remediate...' },
-        { speaker: 'Unknown', text: 'ameninta sa distruga website-uri intregi.' },
-        { speaker: 'Unknown', text: 'Am nevoie de ajutorul tau pentru a le identifica si elimina.' },
-        { speaker: 'Unknown', text: 'Esti gata sa pornesti in aceasta misiune?' }
+        { speaker: 'Desconocido', text: 'Últimamente me he dedicado a una investigación extremadamente importante. (pulsa para continuar)' },
+        { speaker: 'Desconocido', text: 'Un espécimen informático que prometía mejorar la seguridad de las páginas web.' },
+        { speaker: 'Desconocido', text: 'Aún no sé por qué, pero su desarrollo no salió como estaba planeado.' },
+        { speaker: 'Desconocido', text: 'Se transformó en un virus informaticó y escapó de la cápsula donde estaba almacenado.' },
+        { speaker: 'Desconocido', text: 'Con mucho esfuerzo logré atraparlo y encerrarlo de nuevo.' },
+        { speaker: 'Desconocido', text: 'Pero dejó tras de sí daños que, si no se reparan...' },
+        { speaker: 'Desconocido', text: 'amenazan con destruir sitios web enteros.' },
+        { speaker: 'Desconocido', text: 'Necesito tu ayuda para identificarlos y eliminarlos.' },
+        { speaker: 'Desconocido', text: '¿Estás lista para emprender esta misión?' }
     ];
     playDialogueSequence(dialogues, () => {
         saveState(STAGES.CHOICE);
@@ -401,13 +401,13 @@ function runIntroSequence() {
 function showChoiceScreen() {
     contentArea.innerHTML = '';
 
-    const btnYes = createButton('I am Ready!', () => {
+    const btnYes = createButton('¡Estoy lista!', () => {
         // Clear buttons immediately
         controlsArea.innerHTML = '';
 
         const d = [
-            { speaker: 'Unknown', text: 'Pentru a salva internetul, am nevoie de timpul si atentia ta.' },
-            { speaker: 'Unknown', text: 'Apasa butonul urmator atunci cand esti pregatita.' }
+            { speaker: 'Desconocido', text: 'Para salvar el internet, necesito tu tiempo y atención.' },
+            { speaker: 'Desconocido', text: 'Pulsa el siguiente botón cuando estés preparada.' }
         ];
         playDialogueSequence(d, () => {
             saveState(STAGES.READY_WAIT);
@@ -415,7 +415,7 @@ function showChoiceScreen() {
         });
     });
 
-    const btnNo = createButton('I dont care !', () => {
+    const btnNo = createButton('¡No me importa!', () => {
         // Clear buttons immediately
         controlsArea.innerHTML = '';
         saveState(STAGES.MISSION_ABORTED);
@@ -430,14 +430,14 @@ function showChoiceScreen() {
 function showMissionAborted() {
     controlsArea.innerHTML = '';
     const d = [
-        { speaker: 'Unknown', text: 'Inteleg... uneori, cele mai importante misiuni raman neincepute.' },
-        { speaker: 'Unknown', text: 'Iti doresc mult succes in drumul tau.' }
+        { speaker: 'Desconocido', text: 'Entiendo... a veces, las misiones más importantes se quedan sin empezar.' },
+        { speaker: 'Desconocido', text: 'Te deseo mucho éxito en tu camino.' }
     ];
     playDialogueSequence(d, () => {
         hideDialogue();
-        contentArea.innerHTML = '<h1 style="color:var(--error-color); font-size: 2.5rem; margin-bottom: 20px;">MISSION ABORTED</h1>';
+        contentArea.innerHTML = '<h1 style="color:var(--error-color); font-size: 2.5rem; margin-bottom: 20px;">MISIÓN ABORTADA</h1>';
 
-        const mainScreenBtn = createButton('Main Screen', () => {
+        const mainScreenBtn = createButton('Pantalla Principal', () => {
             saveState(STAGES.PIN_CHECK);
             renderStage(STAGES.PIN_CHECK);
         });
@@ -448,7 +448,7 @@ function showMissionAborted() {
 function showReadyScreen() {
     contentArea.innerHTML = '';
 
-    const btn = createButton('Sunt Gata', () => {
+    const btn = createButton('Estoy Preparada', () => {
         saveState(STAGES.STAGE_1);
         renderStage(STAGES.STAGE_1);
     });
@@ -478,20 +478,20 @@ function runStage1() {
     hideDialogue();
 
     const d = [
-        { speaker: 'Unknown', text: 'Super, ma bucur ca ai ales sa accepti aceasta misiune.' },
-        { speaker: 'Unknown', text: 'Inca nu m-am prezentat:' },
-        { speaker: 'Unknown', text: 'Numele meu este G. Cunoscut ca profesor G.' },
-        { speaker: 'Profesor G', text: 'Ce trebuie sa stii despre acest virus este ca e foarte siret.' },
-        { speaker: 'Profesor G', text: 'Din fericire am un dipozitiv care ma ajuta sa identific website-urile unde a produs pagube.' },
-        { speaker: 'Profesor G', text: 'Sa incepem...' },
-        { speaker: 'Profesor G', text: 'Aparatul imi arata ca initial virusul a trecut pe la Google Fotos.' },
-        { speaker: 'Profesor G', text: 'A gasit o imagine in care a ascuns un obiect periculos.' },
-        { speaker: 'Profesor G', text: 'Trebuie neaparat sa gasim acel obiect, de altfel toate pozele vor fi infectate.' },
-        { speaker: 'Profesor G', text: 'Nu-i asa ca nu vrei sa pierzi toate acele amintiri frumoase?' },
-        { speaker: 'Profesor G', text: 'Am reusit sa identific imaginea, dar nu si obiectul.' },
-        { speaker: 'Profesor G', text: 'Este necesar sa aflam coordonatele obiectului ascuns.' },
-        { speaker: 'Profesor G', text: 'Tot ce stiu este ca a lasat urmatoarea ghicitoare:' },
-        { speaker: 'Profesor G', text: 'Acest obiect nu functioneaza singur, dar fara el nimic nu se deschide. In ce casuta se afla?(apasa pentru a afisa imaginea)' }
+        { speaker: 'Desconocido', text: 'Genial, me alegra que hayas aceptado esta misión.' },
+        { speaker: 'Desconocido', text: 'Aún no me he presentado:' },
+        { speaker: 'Desconocido', text: 'Mi nombre es G. Conocido como el Profesor G.' },
+        { speaker: 'Profesor G', text: 'Lo que debes saber sobre este virus es que es muy astuto.' },
+        { speaker: 'Profesor G', text: 'Por suerte, tengo un dispositivo que me ayuda a identificar los sitios web donde ha causado daños.' },
+        { speaker: 'Profesor G', text: 'Empecemos...' },
+        { speaker: 'Profesor G', text: 'El aparato me indica que inicialmente el virus pasó por Google Fotos.' },
+        { speaker: 'Profesor G', text: 'Encontró una imagen en la que escondió un objeto peligroso.' },
+        { speaker: 'Profesor G', text: 'Debemos encontrar ese objeto sin falta, de lo contrario, todas las fotos se infectarán.' },
+        { speaker: 'Profesor G', text: 'No querrás perder todos esos hermosos recuerdos, ¿verdad?' },
+        { speaker: 'Profesor G', text: 'He logrado identificar la imagen, pero no el objeto.' },
+        { speaker: 'Profesor G', text: 'Es necesario descubrir las coordenadas del objeto oculto.' },
+        { speaker: 'Profesor G', text: 'Todo lo que sé es que dejó el siguiente acertijo:' },
+        { speaker: 'Profesor G', text: 'Este objeto no funciona solo, pero sin él nada se abre. ¿En qué casilla se encuentra? (pulsa para mostrar la imagen)' }
     ];
 
     playDialogueSequence(d, () => {
@@ -501,15 +501,15 @@ function runStage1() {
         img.className = 'game-img fade-in';
         contentArea.appendChild(img);
 
-        const inp = createInput('ex:A1');
+        const inp = createInput('ej: A1');
         contentArea.appendChild(inp);
 
-        const btn = createButton('Verifica', () => {
+        const btn = createButton('Verificar', () => {
             if (inp.value.toUpperCase().trim() === 'F2') {
                 saveState(STAGES.STAGE_2);
                 renderStage(STAGES.STAGE_2);
             } else {
-                showFeedback('Obiectul nu este acolo... mai incearca.', true)
+                showFeedback('El objeto no está ahí... inténtalo de nuevo.', true)
             }
         });
         contentArea.appendChild(btn);
@@ -519,22 +519,22 @@ function runStage1() {
 function runStage2() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'Excelent, ai reusit sa identifici obiectul, care era defapt o cheie.' },
-        { speaker: 'Profesor G', text: 'Acum pot sa o elimin si sa salvez toate pozele.' },
-        { speaker: 'Profesor G', text: 'M-ai ajutat sa salvez acele amintiri frumoase pe care le stocam in poze.' },
-        { speaker: 'Profesor G', text: 'Se pare ca urmatorul obiectiv a fost Wikipedia.com' },
-        { speaker: 'Profesor G', text: 'Acolo a ascuns o diversiune.' },
-        { speaker: 'Profesor G', text: 'Daca nu o identificam, va altera toate definitiile.' },
-        { speaker: 'Profesor G', text: 'A ascuns-o chiar in definitia lui. ' },
-        { speaker: 'Profesor G', text: 'Poti sa identifici definitia corecta a virusului?' }
+        { speaker: 'Profesor G', text: '¡Excelente! Lograste identificar el objeto, que en realidad era una llave.' },
+        { speaker: 'Profesor G', text: 'Ahora puedo eliminarla y salvar todas las fotos.' },
+        { speaker: 'Profesor G', text: 'Me has ayudado a salvar esos hermosos recuerdos que guardábamos en las imágenes.' },
+        { speaker: 'Profesor G', text: 'Parece que el siguiente objetivo fue Wikipedia.com.' },
+        { speaker: 'Profesor G', text: 'Allí escondió una distracción.' },
+        { speaker: 'Profesor G', text: 'Si no la identificamos, alterará todas las definiciones.' },
+        { speaker: 'Profesor G', text: 'La escondió justo en su propia definición.' },
+        { speaker: 'Profesor G', text: '¿Puedes identificar la definición correcta de virus?' }
     ];
     playDialogueSequence(d, () => {
         contentArea.innerHTML = '';
 
         const defs = [
-            { text: 'Un virus este un microorganism microscopic care face parte din categoria organismelor unicelulare si care se reproduce prin diviziune celulara...', correct: false },
-            { text: 'Un virus este un agent infectios microscopic, alcătuit din material genetic (ADN sau ARN) invelit într-o capsida proteica, care se poate multiplica doar in interiorul celulelor vii ale unui organism gazda.', correct: true },
-            { text: 'Un virus este o bacterie extrem de mica, invizibila cu microscopul optic obisnuit...', correct: false }
+            { text: 'Un virus es un microorganismo microscópico que forma parte de la categoría de organismos unicelulares y que se reproduce por división celular...', correct: false },
+            { text: 'Un virus es un agente infeccioso microscópico, compuesto por material genético (ADN o ARN) envuelto en una cápside proteica, que solo puede multiplicarse dentro de las células vivas de un organismo huésped.', correct: true },
+            { text: 'Un virus es una bacteria extremadamente pequeña, invisible con un microscopio óptico común...', correct: false }
         ];
 
         const container = document.createElement('div');
@@ -550,7 +550,7 @@ function runStage2() {
                     saveState(STAGES.STAGE_3);
                     renderStage(STAGES.STAGE_3);
                 } else {
-                    showFeedback('Nu cred ca este aceasta... mai incearca.', true);
+                    showFeedback('No creo que sea esta... inténtalo de nuevo.', true);
                 }
             };
             container.appendChild(card);
@@ -564,12 +564,12 @@ function runStage3() {
     hideDialogue();
     // Split dialogue to insert game
     const d1 = [
-        { speaker: 'Profesor G', text: 'Corect, ai reusit sa identifici definitia.' },
-        { speaker: 'Profesor G', text: 'Acum am eliminat complet diversiunea.' },
-        { speaker: 'Profesor G', text: 'In continuare aparatul imi indica acum ca virusul a trecut apoi pe la Imdb.com.' },
-        { speaker: 'Profesor G', text: 'Se pare ca a sters anul de lansare al unor filme' },
-        { speaker: 'Profesor G', text: 'Daca nu le punem la loc, aceste filme risca sa dispara.' },
-        { speaker: 'Profesor G', text: 'Vezi daca poti sa identifici anii de lansare pentru filmele urmatoare:' }
+        { speaker: 'Profesor G', text: 'Correcto, lograste identificar la definición.' },
+        { speaker: 'Profesor G', text: 'Ahora he eliminado completamente la distracción.' },
+        { speaker: 'Profesor G', text: 'Mi aparato me indica que el virus pasó después por Imdb.com.' },
+        { speaker: 'Profesor G', text: 'Parece que ha borrado el año de estreno de algunas películas.' },
+        { speaker: 'Profesor G', text: 'Si no los recuperamos, estas películas corren el riesgo de desaparecer.' },
+        { speaker: 'Profesor G', text: 'Mira si puedes identificar los años de estreno de las siguientes películas:' }
     ];
 
     playDialogueSequence(d1, () => {
@@ -595,7 +595,7 @@ function runStage3() {
             img.src = m.img;
             img.className = 'movie-thumb';
 
-            const inp = createInput('Anul?');
+            const inp = createInput('¿Año?');
             inp.type = 'number';
             inp.oninput = (e) => {
                 if (parseInt(e.target.value) === m.year) {
@@ -627,14 +627,14 @@ function runStage3() {
 function runStage4() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'Foarte bine, ai identificat corect datelele de lansare.' },
-        { speaker: 'Profesor G', text: 'Ar fi fost pacat ca aceste filme sa fi disparut.' },
-        { speaker: 'Profesor G', text: 'Si trebuie sa recunosc ca virusul are gusturi bune :D' },
-        { speaker: 'Profesor G', text: 'Ultima, Klaus, e o animatie excelenta pe care ti-o recomand cu drag daca nu ai vazut-o inca.' },
-        { speaker: 'Profesor G', text: 'Sa continuam cu urmatorul obiectiv al virusului: Spotify.com' },
-        { speaker: 'Profesor G', text: 'Aici a lasat o bariera - un mic puzzle pe care trebuie sa-l rezolvi.' },
-        { speaker: 'Profesor G', text: 'Pentru a continua sa ii luam urma, am nevoie de urechea ta muzicala.' },
-        { speaker: 'Profesor G', text: 'Poti identifica notele melodiei? (P.S O sa ai nevoie de sunet)' }
+        { speaker: 'Profesor G', text: 'Muy bien, has identificado correctamente las fechas de estreno.' },
+        { speaker: 'Profesor G', text: 'Habría sido una pena que estas películas desaparecieran.' },
+        { speaker: 'Profesor G', text: 'Y debo admitir que el virus tiene buen gusto :D' },
+        { speaker: 'Profesor G', text: 'La última, Klaus, es una animación excelente que te recomiendo de todo corazón si aún no la has visto.' },
+        { speaker: 'Profesor G', text: 'Continuemos con el siguiente objetivo del virus: Spotify.com.' },
+        { speaker: 'Profesor G', text: 'Aquí ha dejado una barrera: un pequeño puzzle que debes resolver.' },
+        { speaker: 'Profesor G', text: 'Para seguirle el rastro, necesito tu oído musical.' },
+        { speaker: 'Profesor G', text: '¿Puedes identificar las notas de la melodía? (P.D. Necesitarás sonido)' }
     ];
     playDialogueSequence(d, () => {
         contentArea.innerHTML = '';
@@ -642,15 +642,15 @@ function runStage4() {
         const audio = document.getElementById('twinkle-track');
         let isPlaying = false;
 
-        const playBtn = createButton('Play Music', () => {
+        const playBtn = createButton('Reproducir Música', () => {
             if (!isPlaying) {
                 audio.currentTime = 0;
                 audio.play();
-                playBtn.textContent = 'Pause Music';
-                isPlaying = true; S
+                playBtn.textContent = 'Pausar Música';
+                isPlaying = true;
             } else {
                 audio.pause();
-                playBtn.textContent = 'Play Music';
+                playBtn.textContent = 'Reproducir Música';
                 isPlaying = false;
             }
         });
@@ -670,7 +670,7 @@ function runStage4() {
             btn.onclick = () => {
                 if (isPlaying) {
                     audio.pause();
-                    playBtn.textContent = 'Play Music';
+                    playBtn.textContent = 'Reproducir Música';
                     isPlaying = false;
                 }
 
@@ -694,7 +694,7 @@ function checkMusicInput(note) {
     const currentIndex = musicSequenceInput.length - 1;
     if (musicSequenceInput[currentIndex] !== target[currentIndex]) {
         musicSequenceInput = [];
-        showFeedback('Incorect! Secventa s-a resetat.', true, 1000);
+        showFeedback('¡Incorrecto! La secuencia se ha reiniciado.', true, 1000);
     } else {
         if (musicSequenceInput.length === target.length) {
             saveState(STAGES.STAGE_5);
@@ -706,20 +706,20 @@ function checkMusicInput(note) {
 function runStage5() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'Eram sigur ca nu o sa ai probleme cu acest puzzle.' },
-        { speaker: 'Profesor G', text: 'Stiam ca ai ureche muzicala si cu siguranta ca ti s-a mai spus si ca ai o voce frumoasa' },
-        { speaker: 'Profesor G', text: 'Continua sa dezvolti aceasta calitate pe care o ai. ' },
-        { speaker: 'Profesor G', text: 'Bun, sa continuam cu misiunea noastra.' },
-        { speaker: 'Profesor G', text: 'Din datele mele, virusul a trecut si pe la MyBible.eu.' },
-        { speaker: 'Profesor G', text: 'A sters referinta unui verset, si trebuie sa o punem la loc' },
-        { speaker: 'Profesor G', text: 'Reusesti sa gasesti referinta versetului?' }
+        { speaker: 'Profesor G', text: 'Estaba seguro de que no tendrías problemas con este puzzle.' },
+        { speaker: 'Profesor G', text: 'Sabía que tenías oído musical, y seguro que también te han dicho que tienes una voz hermosa.' },
+        { speaker: 'Profesor G', text: 'Sigue desarrollando esa cualidad que tienes.' },
+        { speaker: 'Profesor G', text: 'Bien, continuemos con nuestra misión.' },
+        { speaker: 'Profesor G', text: 'Según mis datos, el virus también pasó por MyBible.eu.' },
+        { speaker: 'Profesor G', text: 'Borró la referencia de un versículo y debemos recuperarla.' },
+        { speaker: 'Profesor G', text: '¿Logras encontrar la referencia del versículo?' }
     ];
 
     playDialogueSequence(d, () => {
         contentArea.innerHTML = '';
 
         const quote = document.createElement('blockquote');
-        quote.textContent = '„Eu am cautat pe Domnul, si mi-a raspuns: m-a izbavit din toate temerile mele.”';
+        quote.textContent = '„Busqué a Jehová, y él me oyó, y me libró de todos mis temores.”';
         contentArea.appendChild(quote);
 
         const container = document.createElement('div');
@@ -727,25 +727,25 @@ function runStage5() {
 
         const selBook = document.createElement('select');
         [
-            'Geneza', 'Exodul', 'Leviticul', 'Numeri', 'Deuteronomul',
-            'Iosua', 'Judecatori', 'Rut',
-            '1 Samuel', '2 Samuel', '1 Imparati', '2 Imparati',
-            '1 Cronici', '2 Cronici', 'Ezra', 'Neemia', 'Estera',
-            'Iov', 'Psalmii', 'Proverbe', 'Eclesiastul', 'Cantarea Cantarilor',
-            'Isaia', 'Ieremia', 'Plangerile lui Ieremia', 'Ezechiel', 'Daniel',
-            'Osea', 'Ioel', 'Amos', 'Obadia', 'Iona', 'Mica',
-            'Naum', 'Habacuc', 'Tefania', 'Hagai', 'Zaharia', 'Maleahi',
-            'Matei', 'Marcu', 'Luca', 'Ioan',
-            'Fapte',
-            'Romani', '1 Corinteni', '2 Corinteni',
-            'Galateni', 'Efeseni', 'Filipeni', 'Coloseni',
-            '1 Tesaloniceni', '2 Tesaloniceni',
-            '1 Timotei', '2 Timotei', 'Tit', 'Filimon',
-            'Evrei', 'Iacov',
-            '1 Petru', '2 Petru',
-            '1 Ioan', '2 Ioan', '3 Ioan',
-            'Iuda',
-            'Apocalipsa'
+            'Génesis', 'Éxodo', 'Levítico', 'Números', 'Deuteronomio',
+            'Josué', 'Jueces', 'Rut',
+            '1 Samuel', '2 Samuel', '1 Reyes', '2 Reyes',
+            '1 Crónicas', '2 Crónicas', 'Esdras', 'Nehemías', 'Ester',
+            'Job', 'Salmos', 'Proverbios', 'Eclesiastés', 'Cantares',
+            'Isaías', 'Jeremías', 'Lamentaciones', 'Ezequiel', 'Daniel',
+            'Oseas', 'Joel', 'Amós', 'Abdías', 'Jonás', 'Miqueas',
+            'Nahúm', 'Habacuc', 'Sofonías', 'Hageo', 'Zacarías', 'Malaquías',
+            'Mateo', 'Marcos', 'Lucas', 'Juan',
+            'Hechos',
+            'Romanos', '1 Corintios', '2 Corintios',
+            'Gálatas', 'Efesios', 'Filipenses', 'Colosenses',
+            '1 Tesalonicenses', '2 Tesalonicenses',
+            '1 Timotei', '2 Timotei', 'Tito', 'Filemón',
+            'Hebreos', 'Santiago',
+            '1 Pedro', '2 Pedro',
+            '1 Juan', '2 Juan', '3 Juan',
+            'Judas',
+            'Apocalipsis'
         ].forEach(b => {
             const opt = document.createElement('option');
             opt.value = b;
@@ -774,12 +774,12 @@ function runStage5() {
         container.appendChild(selVerse);
         contentArea.appendChild(container);
 
-        const btn = createButton('Verifica', () => {
-            if (selBook.value === 'Psalmii' && selChap.value == '34' && selVerse.value == '4') {
+        const btn = createButton('Verificar', () => {
+            if (selBook.value === 'Salmos' && selChap.value == '34' && selVerse.value == '4') {
                 saveState(STAGES.STAGE_6);
                 renderStage(STAGES.STAGE_6);
             } else {
-                showFeedback('Dispozitivul imi indica ca e gresit. Mai cauta.', true);
+                showFeedback('El dispositivo indica que es incorrecto. Sigue buscando.', true);
             }
         });
         btn.style.marginTop = '20px';
@@ -790,16 +790,16 @@ function runStage5() {
 function runStage6() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'L-ai gasit!' },
-        { speaker: 'Profesor G', text: 'Ma bucur, deoarece chiar este un verset frumos' },
-        { speaker: 'Profesor G', text: 'Sper sa il pastrezi in inima ta anul acesta.' },
-        { speaker: 'Profesor G', text: 'Domnul sa te pazeasca si sa te umple cu toate binecuvantarile Sale.' },
-        { speaker: 'Profesor G', text: 'Acum sa mergem mai departe...' },
-        { speaker: 'Profesor G', text: 'Urmatorul website pe pe care l-a corupt este Youtube.com' },
-        { speaker: 'Profesor G', text: 'Observ ca a trecut pe la un videoclip muzical si a sters niste cuvinte din versuri.' },
-        { speaker: 'Profesor G', text: 'Sunt convins ca esti persoana potrivita' },
-        { speaker: 'Profesor G', text: 'Stiu ca vei gasi cu usurinta cuvintele lipsa' },
-        { speaker: 'Profesor G', text: 'Iata versurile:' }
+        { speaker: 'Profesor G', text: '¡Lo encontraste!' },
+        { speaker: 'Profesor G', text: 'Me alegra, porque realmente es un versículo hermoso.' },
+        { speaker: 'Profesor G', text: 'Espero que lo guardes en tu corazón este año.' },
+        { speaker: 'Profesor G', text: 'Que el Señor te guarde y te colme de todas sus bendiciones.' },
+        { speaker: 'Profesor G', text: 'Ahora sigamos adelante...' },
+        { speaker: 'Profesor G', text: 'El siguiente sitio web que corrompió fue Youtube.com.' },
+        { speaker: 'Profesor G', text: 'Observo que pasó por un video musical y borró algunas palabras de la letra.' },
+        { speaker: 'Profesor G', text: 'Estoy convencido de que eres la persona adecuada.' },
+        { speaker: 'Profesor G', text: 'Sé que encontrarás con facilidad las palabras que faltan.' },
+        { speaker: 'Profesor G', text: 'Aquí tienes la letra:' }
     ];
 
     playDialogueSequence(d, () => {
@@ -819,7 +819,7 @@ function runStage6() {
         `;
         contentArea.appendChild(wrapper);
 
-        const btn = createButton('Verifica', () => {
+        const btn = createButton('Verificar', () => {
             const val1 = document.getElementById('lyric1').value.trim().toLowerCase();
             const val2 = document.getElementById('lyric2').value.trim().toLowerCase();
 
@@ -830,7 +830,7 @@ function runStage6() {
                 saveState(STAGES.STAGE_7);
                 renderStage(STAGES.STAGE_7);
             } else {
-                showFeedback('Ceva nu e bine...', true);
+                showFeedback('Algo no está bien...', true);
             }
         });
         btn.style.marginTop = '20px';
@@ -841,13 +841,13 @@ function runStage6() {
 function runStage7() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'Perfect, nici nu imi faceam griji ca nu vei reusi :)' },
-        { speaker: 'Profesor G', text: 'Foarte frumoasa melodia, cat si interpretarea ;)' },
-        { speaker: 'Profesor G', text: 'Acum ca am reparat dauna, mergem mai departe.' },
-        { speaker: 'Profesor G', text: 'Aparatul meu indica ultimul website corupt: Google Maps' },
-        { speaker: 'Profesor G', text: 'Am reusit sa gasesc locatia unde a creat o bresa.' },
-        { speaker: 'Profesor G', text: 'Ca sa inchid bresa trebuie sa stiu numele strazii unde a fost creata' },
-        { speaker: 'Profesor G', text: 'Am un presentiment ca vei stii numele acestei strazi:' }
+        { speaker: 'Profesor G', text: 'Perfecto, ni siquiera me preocupaba que no lo lograras :)' },
+        { speaker: 'Profesor G', text: 'Muy bonita la canción y la interpretación ;)' },
+        { speaker: 'Profesor G', text: 'Ahora que hemos reparado el daño, sigamos adelante.' },
+        { speaker: 'Profesor G', text: 'Mi aparato indica el último sitio web corrupto: Google Maps.' },
+        { speaker: 'Profesor G', text: 'He logrado encontrar la ubicación donde creó una brecha.' },
+        { speaker: 'Profesor G', text: 'Para cerrar la brecha, debo saber el nombre de la calle donde fue creada.' },
+        { speaker: 'Profesor G', text: 'Tengo el presentimiento de que sabrás el nombre de esta calle:' }
     ];
 
     playDialogueSequence(d, () => {
@@ -857,10 +857,10 @@ function runStage7() {
         img.className = 'game-img';
         contentArea.appendChild(img);
 
-        const inp = createInput('Ce strada este?');
+        const inp = createInput('¿Qué calle es?');
         contentArea.appendChild(inp);
 
-        const btn = createButton('Verifica', () => {
+        const btn = createButton('Verificar', () => {
             const v = inp.value.trim().toLowerCase();
             const valid = ['calle de rusia', 'calle rusia', 'c. rusia', 'c. de rusia', 'c rusia', 'c de rusia', 'c.rusia', 'rusia'].includes(v);
 
@@ -868,7 +868,7 @@ function runStage7() {
                 saveState(STAGES.FINAL);
                 renderStage(STAGES.FINAL);
             } else {
-                showFeedback('Nup, nu este asta...', true);
+                showFeedback('Nop, no es esa...', true);
             }
         });
         contentArea.appendChild(btn);
@@ -878,19 +878,19 @@ function runStage7() {
 function runFinal() {
     hideDialogue();
     const d = [
-        { speaker: 'Profesor G', text: 'Perfect, asta era numele strazii!' },
-        { speaker: 'Profesor G', text: 'Acum imi aduc si eu aminte:' },
-        { speaker: 'Profesor G', text: 'Am petrecut cativa ani in acest loc, ce amintiri fumoase...' },
-        { speaker: 'Profesor G', text: 'In sfarsit am reparat toate daunele lasate in urma.' },
-        { speaker: 'Profesor G', text: 'Iti multumesc pentru tot ajutorul oferit.' },
-        { speaker: 'Profesor G', text: 'Acum pot sta linistit stiind ca internetul este salvat.' },
-        { speaker: 'Profesor G', text: 'Mult succes si fereste-te de orice fel de virusi :))' }
+        { speaker: 'Profesor G', text: '¡Perfecto! ¡Ese era el nombre de la calle!' },
+        { speaker: 'Profesor G', text: 'Ahora recuerdo perfectamente:' },
+        { speaker: 'Profesor G', text: 'Pasé varios años en ese lugar, qué hermosos recuerdos...' },
+        { speaker: 'Profesor G', text: 'Por fin hemos reparado todos los daños dejados atrás.' },
+        { speaker: 'Profesor G', text: 'Te agradezco toda la ayuda ofrecida.' },
+        { speaker: 'Profesor G', text: 'Ahora puedo estar tranquilo sabiendo que internet está a salvo.' },
+        { speaker: 'Profesor G', text: 'Mucho éxito y aléjate de cualquier tipo de virus :))' }
     ];
     playDialogueSequence(d, () => {
         hideDialogue();
         contentArea.innerHTML = '<h1 style="color: var(--success-color); font-size: 3rem;">FIN</h1>';
 
-        const bigReset = createButton('Reset Story', fullReset);
+        const bigReset = createButton('Reiniciar Historia', fullReset);
         bigReset.style.marginTop = '40px';
         contentArea.appendChild(bigReset);
 
