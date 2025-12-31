@@ -268,7 +268,7 @@ function renderPinTerminal() {
     keypad.className = 'pin-keypad';
 
     let currentInput = '';
-    const correctPin = '060301';
+    const correctPin = '311225';
 
     const updateDisplay = () => {
         display.textContent = '*'.repeat(currentInput.length) || 'INTRODUCIR PIN';
@@ -897,3 +897,4 @@ function runFinal() {
         resetBtn.classList.add('hidden');
     });
 }
+
