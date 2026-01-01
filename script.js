@@ -268,7 +268,7 @@ function renderPinTerminal() {
     keypad.className = 'pin-keypad';
 
     let currentInput = '';
-    const correctPin = '311225';
+    const correctPin = '060301';
 
     const updateDisplay = () => {
         display.textContent = '*'.repeat(currentInput.length) || 'INTRODUCIR PIN';
@@ -383,12 +383,12 @@ function runIntroSequence() {
 
     const dialogues = [
         { speaker: 'Desconocido', text: 'Últimamente me he dedicado a una investigación extremadamente importante. (pulsa para continuar)' },
-        { speaker: 'Desconocido', text: 'Un espécimen informático que prometía mejorar la seguridad de las páginas web.' },
+        { speaker: 'Desconocido', text: 'Un prototipo informático que prometía mejorar el uso de Internet en el año 2026.' },
         { speaker: 'Desconocido', text: 'Aún no sé por qué, pero su desarrollo no salió como estaba planeado.' },
         { speaker: 'Desconocido', text: 'Se transformó en un virus informaticó y escapó de la cápsula donde estaba almacenado.' },
         { speaker: 'Desconocido', text: 'Con mucho esfuerzo logré atraparlo y encerrarlo de nuevo.' },
         { speaker: 'Desconocido', text: 'Pero dejó tras de sí daños que, si no se reparan...' },
-        { speaker: 'Desconocido', text: 'amenazan con destruir sitios web enteros.' },
+        { speaker: 'Desconocido', text: 'amenazan con arruinar este año.' },
         { speaker: 'Desconocido', text: 'Necesito tu ayuda para identificarlos y eliminarlos.' },
         { speaker: 'Desconocido', text: '¿Estás lista para emprender esta misión?' }
     ];
@@ -521,10 +521,10 @@ function runStage2() {
     const d = [
         { speaker: 'Profesor G', text: '¡Excelente! Lograste identificar el objeto, que en realidad era una llave.' },
         { speaker: 'Profesor G', text: 'Ahora puedo eliminarla y salvar todas las fotos.' },
-        { speaker: 'Profesor G', text: 'Me has ayudado a salvar esos hermosos recuerdos que guardábamos en las imágenes.' },
-        { speaker: 'Profesor G', text: 'Parece que el siguiente objetivo fue Wikipedia.com.' },
+        { speaker: 'Profesor G', text: 'Este año deseo que tomes fotografías que, al volver a mirarlas con el paso del tiempo,' },
+        { speaker: 'Profesor G', text: 'logren capturar no solo imágenes, sino también emociones, recuerdos y los momentos más hermosos que hayas vivido.' },
+        { speaker: 'Profesor G', text: 'A continuacion, parece que el siguiente objetivo fue Wikipedia.com.' },
         { speaker: 'Profesor G', text: 'Allí escondió una distracción.' },
-        { speaker: 'Profesor G', text: 'Si no la identificamos, alterará todas las definiciones.' },
         { speaker: 'Profesor G', text: 'La escondió justo en su propia definición.' },
         { speaker: 'Profesor G', text: '¿Puedes identificar la definición correcta de virus?' }
     ];
@@ -565,7 +565,8 @@ function runStage3() {
     // Split dialogue to insert game
     const d1 = [
         { speaker: 'Profesor G', text: 'Correcto, lograste identificar la definición.' },
-        { speaker: 'Profesor G', text: 'Ahora he eliminado completamente la distracción.' },
+        { speaker: 'Profesor G', text: 'Te deseo que este año esté definido por momentos de alegría sincera, sueños cumplidos,' },
+        { speaker: 'Profesor G', text: 'paz interior, personas queridas cerca y el valor de disfrutar cada instante.' },
         { speaker: 'Profesor G', text: 'Mi aparato me indica que el virus pasó después por Imdb.com.' },
         { speaker: 'Profesor G', text: 'Parece que ha borrado el año de estreno de algunas películas.' },
         { speaker: 'Profesor G', text: 'Si no los recuperamos, estas películas corren el riesgo de desaparecer.' },
@@ -631,6 +632,8 @@ function runStage4() {
         { speaker: 'Profesor G', text: 'Habría sido una pena que estas películas desaparecieran.' },
         { speaker: 'Profesor G', text: 'Y debo admitir que el virus tiene buen gusto :D' },
         { speaker: 'Profesor G', text: 'La última, Klaus, es una animación excelente que te recomiendo de todo corazón si aún no la has visto.' },
+        { speaker: 'Profesor G', text: 'Pero, sobre todo, espero que la película más hermosa sea la película de tu 2026,' },
+        { speaker: 'Profesor G', text: 'una que conduzca al final más bello que el mejor Director ya ha preparado para ti.' },
         { speaker: 'Profesor G', text: 'Continuemos con el siguiente objetivo del virus: Spotify.com.' },
         { speaker: 'Profesor G', text: 'Aquí ha dejado una barrera: un pequeño puzzle que debes resolver.' },
         { speaker: 'Profesor G', text: 'Para seguirle el rastro, necesito tu oído musical.' },
@@ -708,7 +711,7 @@ function runStage5() {
     const d = [
         { speaker: 'Profesor G', text: 'Estaba seguro de que no tendrías problemas con este puzzle.' },
         { speaker: 'Profesor G', text: 'Sabía que tenías oído musical, y seguro que también te han dicho que tienes una voz hermosa.' },
-        { speaker: 'Profesor G', text: 'Sigue desarrollando esa cualidad que tienes.' },
+        { speaker: 'Profesor G', text: 'Sigue desarrollando esa cualidad que tienes en este nuevo año.' },
         { speaker: 'Profesor G', text: 'Bien, continuemos con nuestra misión.' },
         { speaker: 'Profesor G', text: 'Según mis datos, el virus también pasó por MyBible.eu.' },
         { speaker: 'Profesor G', text: 'Borró la referencia de un versículo y debemos recuperarla.' },
@@ -792,8 +795,8 @@ function runStage6() {
     const d = [
         { speaker: 'Profesor G', text: '¡Lo encontraste!' },
         { speaker: 'Profesor G', text: 'Me alegra, porque realmente es un versículo hermoso.' },
-        { speaker: 'Profesor G', text: 'Espero que lo guardes en tu corazón este año.' },
-        { speaker: 'Profesor G', text: 'Que el Señor te guarde y te colme de todas sus bendiciones.' },
+        { speaker: 'Profesor G', text: 'Espero que busques al Señor en toda situación, sea pequeña o grande,' },
+        { speaker: 'Profesor G', text: 'y que Él te muestre el mejor camino para ti.' },
         { speaker: 'Profesor G', text: 'Ahora sigamos adelante...' },
         { speaker: 'Profesor G', text: 'El siguiente sitio web que corrompió fue Youtube.com.' },
         { speaker: 'Profesor G', text: 'Observo que pasó por un video musical y borró algunas palabras de la letra.' },
@@ -842,7 +845,8 @@ function runStage7() {
     hideDialogue();
     const d = [
         { speaker: 'Profesor G', text: 'Perfecto, ni siquiera me preocupaba que no lo lograras :)' },
-        { speaker: 'Profesor G', text: 'Muy bonita la canción y la interpretación ;)' },
+        { speaker: 'Profesor G', text: 'Muy bonita la canción y la interpretación.' },
+        { speaker: 'Profesor G', text: 'Espero escuchar este año muchas otras canciones hermosas como esta.' },
         { speaker: 'Profesor G', text: 'Ahora que hemos reparado el daño, sigamos adelante.' },
         { speaker: 'Profesor G', text: 'Mi aparato indica el último sitio web corrupto: Google Maps.' },
         { speaker: 'Profesor G', text: 'He logrado encontrar la ubicación donde creó una brecha.' },
@@ -879,8 +883,7 @@ function runFinal() {
     hideDialogue();
     const d = [
         { speaker: 'Profesor G', text: '¡Perfecto! ¡Ese era el nombre de la calle!' },
-        { speaker: 'Profesor G', text: 'Ahora recuerdo perfectamente:' },
-        { speaker: 'Profesor G', text: 'Pasé varios años en ese lugar, qué hermosos recuerdos...' },
+        { speaker: 'Profesor G', text: 'Que cada "calle" que transites este año contribuya a construir un carácter que apunte al cielo.' },
         { speaker: 'Profesor G', text: 'Por fin hemos reparado todos los daños dejados atrás.' },
         { speaker: 'Profesor G', text: 'Te agradezco toda la ayuda ofrecida.' },
         { speaker: 'Profesor G', text: 'Ahora puedo estar tranquilo sabiendo que internet está a salvo.' },
@@ -897,4 +900,3 @@ function runFinal() {
         resetBtn.classList.add('hidden');
     });
 }
-
